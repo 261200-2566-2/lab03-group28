@@ -3,6 +3,7 @@ import java.text.DecimalFormat;
 public class Character {
     private int level = 1;
     private double Base_speed ,max_HP ,HP ,max_Mana ,max_speed;
+    private double beforesword_bsp, beforeshield_bsp;
     private Sword sword;
     private Shield shield;
     Character (int lv,int base_runspeed){
@@ -14,6 +15,7 @@ public class Character {
     public void equip_sword(Sword sword){
         if(this.sword == null){
             this.sword = sword;
+            beforesword_bsp = Base_speed;
             Base_speed = Base_speed-(2+0.04*this.sword.returnlv());
             update();
         }else{
@@ -22,7 +24,7 @@ public class Character {
     }
     public void unequip_sword(){
         if(this.sword != null){
-            Base_speed = Base_speed+(2+0.04*this.sword.returnlv());
+            Base_speed = beforesword_bsp;
             this.sword = null;
             update();
         }else{
@@ -32,6 +34,7 @@ public class Character {
     public void equip_shield(Shield shield){
         if(this.shield == null){
             this.shield = shield;
+            beforeshield_bsp = Base_speed;
             Base_speed = Base_speed-(2+0.08*this.shield.returnlv());
             update();
         }else{
@@ -40,7 +43,7 @@ public class Character {
     }
     public void unequip_shield(){
         if(this.sword != null){
-            Base_speed = Base_speed+(2+0.08*this.shield.returnlv());
+            Base_speed = beforeshield_bsp;
             this.shield = null;
             update();
         }else{
